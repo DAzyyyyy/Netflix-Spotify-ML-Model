@@ -1,6 +1,6 @@
 # =============================================================================
 # Capstone Project: Netflix Movie Rating Regression
-# N-Number: 14732891
+# N-Number: 1####### (protect privacy)
 # =============================================================================
 
 import random
@@ -13,8 +13,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ── 1. Set random seed
-random.seed(14732891)
-np.random.seed(14732891)
+random.seed(1#######)
+np.random.seed(1#######)
 
 # ── 2. Parse data.txt
 # Format:
@@ -24,8 +24,8 @@ np.random.seed(14732891)
 
 print("Parsing data.txt (this may take a minute)...")
 
-DATA_PATH   = '/Users/dazydai/Downloads/data.txt'
-TITLES_PATH = '/Users/dazydai/Downloads/movieTitles.csv'
+DATA_PATH   = 'data/data.txt'
+TITLES_PATH = 'data/movieTitles.csv'
 
 records = []
 current_movie = None
@@ -69,7 +69,7 @@ test_idx  = []
 train_idx = []
 
 for movie_id, group in df.groupby('movie_id'):
-    sampled = group.sample(n=1, random_state=14732891)
+    sampled = group.sample(n=1, random_state=1#######)
     test_idx.extend(sampled.index.tolist())
     train_idx.extend(group.drop(sampled.index).index.tolist())
 
@@ -134,7 +134,7 @@ model = HistGradientBoostingRegressor(
     max_iter=200,
     max_depth=6,
     learning_rate=0.1,
-    random_state=14732891
+    random_state=1#######
 )
 model.fit(X_train, y_train)
 
@@ -154,7 +154,7 @@ if hasattr(model, 'feature_importances_'):
 else:
     # HistGradientBoosting: use permutation importance instead
     from sklearn.inspection import permutation_importance
-    result = permutation_importance(model, X_test, y_test, n_repeats=5, random_state=14732891)
+    result = permutation_importance(model, X_test, y_test, n_repeats=5, random_state=1#######)
     feat_imp = pd.Series(result.importances_mean, index=FEATURES).sort_values(ascending=False)
 
 print("\nFeature importances:")
