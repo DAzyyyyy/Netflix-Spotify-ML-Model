@@ -1,6 +1,6 @@
 # =============================================================================
 # Capstone Project: Music Genre Classification
-# N-Number: 14732891
+# N-Number: 1####### (protect privacy)
 # =============================================================================
 
 import random
@@ -13,11 +13,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ── 1. Set random seed
-random.seed(14732891)
-np.random.seed(14732891)
+random.seed(1#######)
+np.random.seed(1#######)
 
 # ── 2. Load data
-df = pd.read_csv('/Users/dazydai/Downloads/musicData.csv')
+df = pd.read_csv('data/musicData.csv')
 print(f"Raw data shape: {df.shape}")
 
 # ── 3. Data cleaning
@@ -64,7 +64,7 @@ print(f"Remaining missing values: {df.isnull().sum().sum()}")
 train_idx, test_idx = [], []
 for genre in genres:
     g = df[df['music_genre'] == genre]
-    test_s  = g.sample(n=500, random_state=14732891)
+    test_s  = g.sample(n=500, random_state=1#######)
     train_s = g.drop(test_s.index)
     test_idx.extend(test_s.index.tolist())
     train_idx.extend(train_s.index.tolist())
@@ -91,7 +91,7 @@ X_test_s[:, scale_idx]  = scaler.transform(X_test[:, scale_idx])
 
 # ── 6. Dimensionality reduction: PCA
 from sklearn.decomposition import PCA
-pca = PCA(n_components=10, random_state=14732891)
+pca = PCA(n_components=10, random_state=1#######)
 X_tr_pca = pca.fit_transform(X_train_s)
 X_te_pca = pca.transform(X_test_s)
 print(f"PCA (10 components) cumulative explained variance: {pca.explained_variance_ratio_.sum():.3f}")
@@ -105,7 +105,7 @@ print("Training Random Forest (200 trees)...")
 rf = RandomForestClassifier(
     n_estimators=200, max_depth=None,
     min_samples_split=4, class_weight='balanced',
-    random_state=14732891, n_jobs=-1
+    random_state=1#######, n_jobs=-1
 )
 rf.fit(X_tr_pca, y_train)
 
@@ -113,7 +113,7 @@ print("Training Extra Trees (200 trees)...")
 et = ExtraTreesClassifier(
     n_estimators=200, max_depth=None,
     class_weight='balanced',
-    random_state=14732891, n_jobs=-1
+    random_state=1#######, n_jobs=-1
 )
 et.fit(X_tr_pca, y_train)
 
@@ -158,7 +158,7 @@ ax.grid(alpha=0.3)
 
 # Plot 2: PCA 2D cluster visualization
 ax2 = axes[1]
-pca2 = PCA(n_components=2, random_state=14732891)
+pca2 = PCA(n_components=2, random_state=1#######)
 X_2d = pca2.fit_transform(X_train_s)
 for i, (gname, color) in enumerate(zip(genres, colors)):
     mask = y_train == i
@@ -174,7 +174,7 @@ plt.savefig('/Users/dazydai/Downloads/music_classification_results.png', dpi=150
 print("Plot saved: music_classification_results.png")
 
 # ── 10. Feature importance (Extra Trees on raw features)
-et_raw = ExtraTreesClassifier(n_estimators=100, random_state=14732891, n_jobs=-1)
+et_raw = ExtraTreesClassifier(n_estimators=100, random_state=1#######, n_jobs=-1)
 et_raw.fit(X_train_s, y_train)
 feat_imp = pd.Series(et_raw.feature_importances_, index=feature_cols).sort_values(ascending=False)
 print("\nFeature importances (Extra Trees on raw features):")
